@@ -28,7 +28,7 @@ export default function Home() {
 
           {/* "isn't just a flex" text */}
           <span className="text-white/40 text-6xl font-awesome">
-            isn't just a flex,
+            isn&apos;t just a flex,
           </span>
         </div>
 
