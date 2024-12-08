@@ -11,6 +11,15 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "hodling-blue": "#2049F8",
+      },
+      fontFamily: {
+        sans: ["Neue Montreal", "Arial", "Helvetica", "sans-serif"],
+        clash: ["Clash Display", "Arial", "Helvetica", "sans-serif"],
+        awesome: ["Awesome Serif", "serif"],
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
     },
   },

@@ -9,13 +9,113 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000814;
     --foreground: #ededed;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: black;
+  color: white;
+  font-family: "Neue Montreal", Arial, Helvetica, sans-serif;
+}
+
+@keyframes slideUpPonke {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  40% {
+    transform: translate(-90px, -150px) rotate(-21deg);
+  }
+  70% {
+    transform: translate(-150px, -160px) rotate(-20deg) scale(1.5);
+  }
+  100% {
+    transform: translate(-450px, -360px) rotate(-20deg) scale(1.5);
+  }
+}
+
+@keyframes slideUpDoge1 {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  40% {
+    transform: translate(-55px, -170px) rotate(-20deg);
+  }
+  70% {
+    transform: translate(-65px, -170px) rotate(-20deg) scale(1.5);
+  }
+  100% {
+    transform: translate(-295px, -240px) rotate(-20deg) scale(1.5);
+  }
+}
+
+@keyframes slideUpPepe {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  40% {
+    transform: translate(55px, -170px) rotate(20deg);
+  }
+  70% {
+    transform: translate(65px, -170px) rotate(20deg) scale(1.5);
+  }
+  100% {
+    transform: translate(295px, -240px) rotate(20deg) scale(1.5);
+  }
+}
+
+@keyframes slideUpDoge2 {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  40% {
+    transform: translate(90px, -150px) rotate(21deg);
+  }
+  70% {
+    transform: translate(150px, -160px) rotate(20deg) scale(1.5);
+  }
+  100% {
+    transform: translate(450px, -360px) rotate(20deg) scale(1.5);
+  }
+}
+
+@keyframes showAnimatedComponent {
+  0%,
+  70% {
+    opacity: 0;
+    transform: scale(3.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(3.4);
+  }
+}
+
+@keyframes moveLogo {
+  0%,
+  70% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(285px, 0) rotate(20deg);
+  }
+}
+
+@keyframes rotateHolding {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes rotateStrategy {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
 }
