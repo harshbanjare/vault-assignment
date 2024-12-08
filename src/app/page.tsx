@@ -35,7 +35,7 @@ export default function Home() {
         {/* "it's a Strategy" container */}
         <div className="flex items-center gap-2">
           <span className="text-white/40 text-6xl font-awesome mr-3">
-            it's a{" "}
+            it&apos;s a{" "}
           </span>
           <div className="relative inline-block animate-[rotateStrategy_0.5s_ease-out_forwards]">
             {/* Strategy background with stroke */}
