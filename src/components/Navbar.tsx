@@ -5,6 +5,7 @@ import { DashboardCircleSettingsIcon, Analytics01Icon } from "hugeicons-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Link from "next/link";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -15,9 +16,9 @@ const Navbar = () => {
         {/* Left section with logo and nav links */}
         <div className="flex flex-row items-center gap-[60px] bg-[#204AF8]/90 border border-white rounded-lg p-2.5 shadow-[0_2px_0_0_rgba(255,255,255,1)]">
           {/* Logo */}
-          <div className="flex items-center gap-1">
+          <Link href="/" className="flex items-center gap-1">
             <Image src="/assets/logo.png" width={72} height={21} alt="logo" />
-          </div>
+          </Link>
 
           {/* Navigation Links */}
           <div className="flex flex-row items-center gap-8">
@@ -115,11 +116,33 @@ const Navbar = () => {
 };
 
 // Helper component for navigation links
-const NavLink = ({ icon, text }: { icon: React.ReactNode; text: string }) => (
-  <div className="flex flex-row items-center gap-1 cursor-pointer">
-    {icon}
-    <span className="text-white text-md">{text}</span>
-  </div>
-);
+const NavLink = ({ icon, text }: { icon: React.ReactNode; text: string }) => {
+  const routes: { [key: string]: string } = {
+    Home: "/home",
+    Admin: "/admin",
+    Analytics: "/analytics",
+    Guide: "/guide",
+    About: "/about",
+  };
+
+  if (routes[text]) {
+    return (
+      <Link
+        href={routes[text]}
+        className="flex flex-row items-center gap-1 cursor-pointer"
+      >
+        {icon}
+        <span className="text-white text-md">{text}</span>
+      </Link>
+    );
+  }
+
+  return (
+    <div className="flex flex-row items-center gap-1 cursor-pointer">
+      {icon}
+      <span className="text-white text-md">{text}</span>
+    </div>
+  );
+};
 
 export default Navbar;
