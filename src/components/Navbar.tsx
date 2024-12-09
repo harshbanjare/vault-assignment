@@ -1,11 +1,17 @@
+"use client";
+
 import { Home2, Book1, InfoCircle, WalletAdd } from "iconsax-react";
 import { DashboardCircleSettingsIcon, Analytics01Icon } from "hugeicons-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   return (
     <div className="flex justify-center items-center w-full my-8">
-      <div className="flex flex-row justify-between items-center gap-5  max-w-[1040px]">
+      <div className="flex flex-row justify-between items-center gap-5 max-w-[1040px]">
         {/* Left section with logo and nav links */}
         <div className="flex flex-row items-center gap-[60px] bg-[#204AF8]/90 border border-white rounded-lg p-2.5 shadow-[0_2px_0_0_rgba(255,255,255,1)]">
           {/* Logo */}
@@ -44,13 +50,65 @@ const Navbar = () => {
             />
           </button>
 
-          {/* Wallet button */}
-          <button className="flex items-center px-4 py-3 bg-black border border-white rounded-xl shadow-[0_2px_0_0_rgba(255,255,255,1)]">
-            <div className="flex items-center gap-2">
-              <span className="text-white">Connect Wallet</span>
-              <WalletAdd size="20" color="#FFFFFF" />
-            </div>
-          </button>
+          {/* Wallet button - only show on /home */}
+          {pathname === "/home" && (
+            <ConnectButton.Custom>
+              {({
+                account,
+                chain,
+                openAccountModal,
+                openChainModal,
+                openConnectModal,
+                mounted,
+              }) => {
+                const ready = mounted;
+                const connected = ready && account && chain;
+
+                return (
+                  <div
+                    {...(!ready && {
+                      "aria-hidden": true,
+                      style: {
+                        opacity: 0,
+                        pointerEvents: "none",
+                        userSelect: "none",
+                      },
+                    })}
+                  >
+                    {(() => {
+                      if (!connected) {
+                        return (
+                          <button
+                            onClick={openConnectModal}
+                            className="flex items-center px-4 py-3 bg-black border border-white rounded-xl shadow-[0_2px_0_0_rgba(255,255,255,1)] hover:bg-black/80 transition-colors"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="text-white">Connect Wallet</span>
+                              <WalletAdd size="20" color="#FFFFFF" />
+                            </div>
+                          </button>
+                        );
+                      }
+
+                      return (
+                        <button
+                          onClick={openAccountModal}
+                          className="flex items-center px-4 py-3 bg-black border border-white rounded-xl shadow-[0_2px_0_0_rgba(255,255,255,1)] hover:bg-black/80 transition-colors"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-white">
+                              {account.displayName}
+                            </span>
+                            <WalletAdd size="20" color="#FFFFFF" />
+                          </div>
+                        </button>
+                      );
+                    })()}
+                  </div>
+                );
+              }}
+            </ConnectButton.Custom>
+          )}
         </div>
       </div>
     </div>

@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
+
 import { Settings03Icon } from "hugeicons-react";
 import { ArrowDown01Icon } from "hugeicons-react";
+import { InformationCircleIcon } from "hugeicons-react";
 
 import { WalletAdd } from "iconsax-react";
+import { useAccount } from "wagmi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import SlippageModal from "./SlippageModal";
 import TokenSelectorModal from "./TokenSelectorModal";
@@ -24,9 +28,11 @@ const Calculator = () => {
     image: "/assets/tokens/doge.svg",
   });
 
+  const { isConnected } = useAccount();
+
   return (
     <div className="relative flex">
-      <div className="w-[600px] h-[500px] bg-white/[0.07] border border-white rounded-md shadow-[2.69px_2.69px_0px_0px_rgba(255,255,255,1)]">
+      <div className="w-[600px] pb-10 bg-white/[0.07] border border-white rounded-md shadow-[2.69px_2.69px_0px_0px_rgba(255,255,255,1)]">
         <div className="flex flex-row gap-4 mx-[34px] mt-[14px] translate-y-[-50px]">
           {/* Deposit/Withdraw Toggle */}
           <div className="flex bg-[#171A35] border border-white rounded-[7px] shadow-[0_2px_0_0_rgba(255,255,255,1)] p-2">
@@ -171,11 +177,52 @@ const Calculator = () => {
             </div>
           </div>
 
+          <div className="flex flex-col gap-1">
+            <div className="flex flex-row justify-between">
+              <div className="flex flex-row items-center gap-2">
+                <InformationCircleIcon className="text-white" />
+                <span className="text-xs text-white">
+                  Value {mode === "withdraw" ? "Exit" : "Entry"} Fee
+                </span>
+              </div>
+              <div className="flex flex-row items-center gap-2">0.50%</div>
+            </div>
+
+            {mode === "withdraw" && (
+              <div className="flex flex-row justify-between">
+                <div className="flex flex-row items-center gap-2">
+                  <InformationCircleIcon className="text-white" />
+                  <span className="text-xs text-white">Platform Fee</span>
+                </div>
+                <div className="flex flex-row items-center gap-2">1.02%</div>
+              </div>
+            )}
+          </div>
+
           {/*Connect Wallet Button*/}
-          <button className="w-full h-[50px] bg-black hover:bg-black/90 border border-white rounded-[10.4px] px-4 py-2 transition-colors shadow-[0_2px_0_0_rgba(255,255,255,1)] flex items-center justify-center gap-[7px]">
-            <span className="text-white font-dxdynamix">Connect Wallet</span>
-            <WalletAdd variant="Bold" color="white" size={20} />
-          </button>
+          {!isConnected ? (
+            <ConnectButton.Custom>
+              {({ openConnectModal }) => (
+                <button
+                  onClick={openConnectModal}
+                  className="w-full h-[50px] bg-black hover:bg-black/90 border border-white rounded-[10.4px] px-4 py-2 transition-colors shadow-[0_2px_0_0_rgba(255,255,255,1)] flex items-center justify-center gap-[7px]"
+                >
+                  <span className="text-white font-dxdynamix">
+                    Connect Wallet
+                  </span>
+                  <WalletAdd variant="Bold" color="white" size={20} />
+                </button>
+              )}
+            </ConnectButton.Custom>
+          ) : mode === "deposit" ? (
+            <button className="w-full h-[50px] bg-black hover:bg-black/90 border border-white rounded-[10.4px] px-4 py-2 transition-colors shadow-[0_2px_0_0_rgba(255,255,255,1)] flex items-center justify-center gap-[7px]">
+              <span className="text-white font-dxdynamix">Deposit</span>
+            </button>
+          ) : (
+            <button className="w-full h-[50px] bg-black hover:bg-black/90 border border-white rounded-[10.4px] px-4 py-2 transition-colors shadow-[0_2px_0_0_rgba(255,255,255,1)] flex items-center justify-center gap-[7px]">
+              <span className="text-white font-dxdynamix">Withdraw</span>
+            </button>
+          )}
         </div>
       </div>
 
