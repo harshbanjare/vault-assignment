@@ -105,16 +105,8 @@ const Calculator = () => {
               >
                 <div className="flex items-center gap-2">
                   <Image
-                    src={
-                      mode === "deposit"
-                        ? selectedToken.image
-                        : "/assets/Ms Doge.png"
-                    }
-                    alt={`${
-                      mode === "deposit"
-                        ? selectedToken.name
-                        : "MS " + selectedToken.name
-                    } Logo`}
+                    src={selectedToken.image}
+                    alt={`${selectedToken.name} Logo`}
                     width={20}
                     height={20}
                   />
