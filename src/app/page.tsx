@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Rocket01Icon } from "hugeicons-react";
-import Animation from "@/components/home/Animation";
+import Animation from "@/components/landing/Animation";
+import Link from "next/link";
 
-export default function Home() {
+export default function Landing() {
   return (
     <div className="flex flex-col gap-4 justify-center items-center bg-black my-20">
       <div className="flex flex-col items-center">
@@ -58,7 +59,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-row gap-4 my-10">
-        <button className="flex items-center justify-center w-[66px] h-[52px] bg-[#7B61FF] border border-white rounded-xl shadow-[0_2px_0_0_rgba(255,255,255,1)]">
+        <button className="flex items-center justify-center w-[66px] h-[52px] bg-[#7B61FF] border border-white rounded-xl shadow-[0_2px_0_0_rgba(255,255,255,1)] hover:bg-[#6952db] active:translate-y-[2px] active:shadow-none transition-all">
           <Image
             src="/assets/discord.png"
             width={32}
@@ -67,10 +68,12 @@ export default function Home() {
           />
         </button>
 
-        <button className="flex flex-row items-center gap-2 rounded-xl px-12 border shadow-[0_2px_0_0_rgba(255,255,255,1)]">
-          <Rocket01Icon size={24} />
-          Launch App
-        </button>
+        <Link href="/home">
+          <button className="flex flex-row items-center gap-2 rounded-xl px-12 py-3 bg-[#2049F8] text-white border border-white shadow-[0_2px_0_0_rgba(255,255,255,1)] hover:bg-[#1a3ed6] active:translate-y-[2px] active:shadow-none transition-all">
+            <Rocket01Icon size={24} />
+            Launch App
+          </button>
+        </Link>
       </div>
 
       <Animation />

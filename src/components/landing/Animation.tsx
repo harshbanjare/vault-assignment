@@ -3,7 +3,7 @@ import Image from "next/image";
 const Animation = () => {
   return (
     <div className="my-20 relative h-[200px] flex items-center justify-center">
-      {/** Cartoons - all centered behind the logo */}
+      {/** Cartoons - all centered behind the logo initially*/}
       <Image
         src="/assets/ponke.png"
         width={50}
@@ -51,7 +51,7 @@ const Animation = () => {
         priority
       />
 
-      {/** Main Logo - centered */}
+      {/** Main Logo  */}
       <Image
         src="/assets/hero-logo.png"
         width={140}

@@ -64,7 +64,6 @@
   font-display: swap;
 }
 
-/* Clash Display fonts */
 @font-face {
   font-family: "Clash Display";
   src: url("/fonts/ClashDisplay/ClashDisplay-Extralight.otf") format("opentype");
@@ -115,7 +114,15 @@
 
 @font-face {
   font-family: "Awesome Serif";
-  src: url("/fonts/awesome-serif/awesome-serif.ttf") format("truetype");
+  src: url("/fonts/awesome-serif/AwesomeSerif.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "DxDynamix";
+  src: url("/fonts/dx_dynamix/DxDynamix-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }

@@ -17,6 +17,7 @@ export default {
         sans: ["Neue Montreal", "Arial", "Helvetica", "sans-serif"],
         clash: ["Clash Display", "Arial", "Helvetica", "sans-serif"],
         awesome: ["Awesome Serif", "serif"],
+        dxdynamix: ["DxDynamix", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
