@@ -9,7 +9,7 @@ interface Token {
   image: string;
 }
 
-const tokens: Token[] = [
+const depositTokens: Token[] = [
   {
     name: "Dogecoin",
     symbol: "DOGE",
@@ -37,14 +37,45 @@ const tokens: Token[] = [
   },
 ];
 
+const withdrawTokens: Token[] = [
+  {
+    name: "MS Doge",
+    symbol: "DOGE",
+    image: "/assets/tokens/ms_doge.png",
+  },
+  {
+    name: "MS SHIB",
+    symbol: "SHIB",
+    image: "/assets/tokens/ms_shib.png",
+  },
+  {
+    name: "MS PEPE",
+    symbol: "PEPE",
+    image: "/assets/tokens/ms_pepe.png",
+  },
+  {
+    name: "MS BONK",
+    symbol: "BONK",
+    image: "/assets/tokens/ms_bonk.png",
+  },
+  {
+    name: "MS FLOKI",
+    symbol: "FLOKI",
+    image: "/assets/tokens/ms_floki.png",
+  },
+];
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   onSelect: (token: Token) => void;
+  mode: "deposit" | "withdraw";
 }
 
-const TokenSelectorModal = ({ isOpen, onClose, onSelect }: Props) => {
+const TokenSelectorModal = ({ isOpen, onClose, onSelect, mode }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const tokens = mode === "deposit" ? depositTokens : withdrawTokens;
 
   const filteredTokens = useMemo(() => {
     const term = searchTerm.toLowerCase().trim();
@@ -55,7 +86,7 @@ const TokenSelectorModal = ({ isOpen, onClose, onSelect }: Props) => {
         token.name.toLowerCase().includes(term) ||
         token.symbol.toLowerCase().includes(term)
     );
-  }, [searchTerm]);
+  }, [searchTerm, tokens]);
 
   if (!isOpen) return null;
 
@@ -133,7 +164,7 @@ const TokenSelectorModal = ({ isOpen, onClose, onSelect }: Props) => {
                       height={36}
                     />
                     <span className="text-white font-dxdynamix">
-                      {token.name} ({token.symbol})
+                      {token.name} {mode === "deposit" ? token.symbol : ""}
                     </span>
                   </div>
                 </button>

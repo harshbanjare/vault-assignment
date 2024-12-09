@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Settings03Icon } from "hugeicons-react";
 import { ArrowDown01Icon } from "hugeicons-react";
@@ -28,7 +28,12 @@ const Calculator = () => {
     image: "/assets/tokens/doge.svg",
   });
 
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
+
+  const shortAddress = useMemo(() => {
+    if (!address) return "";
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  }, [address]);
 
   return (
     <div className="relative flex">
@@ -100,13 +105,23 @@ const Calculator = () => {
               >
                 <div className="flex items-center gap-2">
                   <Image
-                    src={selectedToken.image}
-                    alt={`${selectedToken.name} Logo`}
+                    src={
+                      mode === "deposit"
+                        ? selectedToken.image
+                        : "/assets/Ms Doge.png"
+                    }
+                    alt={`${
+                      mode === "deposit"
+                        ? selectedToken.name
+                        : "MS " + selectedToken.name
+                    } Logo`}
                     width={20}
                     height={20}
                   />
                   <span className="text-sm font-dxdynamix">
-                    {selectedToken.symbol}
+                    {mode === "deposit"
+                      ? selectedToken.symbol
+                      : "MS " + selectedToken.symbol}
                   </span>
                 </div>
                 <ArrowDown01Icon className="text-white w-4 h-4" />
@@ -158,12 +173,11 @@ const Calculator = () => {
               </div>
             </div>
 
-            <div className="flex flex-1 flex-col items-center gap-2">
-              <div className="font-dxdynamix text-md">
-                ms DOGE Balance: 0.000 DOGE
-              </div>
-
-              {mode === "deposit" ? (
+            {mode === "deposit" ? (
+              <div className="flex flex-1 flex-col items-center gap-2">
+                <div className="font-dxdynamix text-md">
+                  ms DOGE Balance: 0.000 DOGE
+                </div>
                 <button className="flex items-center justify-between w-full border bg-[#1A3DCA] hover:bg-[#1534b1] rounded-md px-4 py-2 transition-colors">
                   <div className="flex items-center gap-2">
                     <Image
@@ -175,7 +189,9 @@ const Calculator = () => {
                     <span className="text-sm font-dxdynamix">ms DOGE</span>
                   </div>
                 </button>
-              ) : (
+              </div>
+            ) : (
+              <div className="flex flex-1 flex-col items-center gap-2">
                 <button className="flex items-center justify-between w-full border bg-[#1A3DCA] hover:bg-[#1534b1] rounded-md px-4 py-2 transition-colors">
                   <div className="flex items-center gap-2">
                     <Image
@@ -187,8 +203,23 @@ const Calculator = () => {
                     <span className="text-sm font-dxdynamix">DOGE</span>
                   </div>
                 </button>
-              )}
-            </div>
+                {isConnected && (
+                  <div className="flex flex-1 w-full flex-col">
+                    <div>Receive at</div>
+                    {/**button with account address */}
+                    <button className="flex items-center text-center justify-center w-full border bg-[#1A3DCA] hover:bg-[#1534b1] rounded-md px-4 py-2 transition-colors">
+                      <Image
+                        src="/assets/tokens/doge.svg"
+                        alt="Doge Logo"
+                        width={20}
+                        height={20}
+                      />
+                      {shortAddress}
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col gap-1">
@@ -254,6 +285,7 @@ const Calculator = () => {
           setSelectedToken(token);
           setIsTokenModalOpen(false);
         }}
+        mode={mode}
       />
     </div>
   );
