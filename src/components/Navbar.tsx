@@ -57,7 +57,6 @@ const Navbar = () => {
                 account,
                 chain,
                 openAccountModal,
-                openChainModal,
                 openConnectModal,
                 mounted,
               }) => {

@@ -28,7 +28,7 @@ const SlippageModal = ({
   ] as const;
 
   return (
-    <div className="fixed inset-0 flex items-start justify-center pt-[102px] bg-black/50 z-50">
+    <div className="fixed inset-0 flex items-start justify-center pt-[102px] bg-black/50 backdrop-blur-xl z-50">
       <div className="w-[448px] bg-[#000814] border-2 border-white rounded-md shadow-[0_5px_0_0_rgba(255,255,255,1)]">
         {/* Header */}
         <div className="flex justify-between items-center p-4">

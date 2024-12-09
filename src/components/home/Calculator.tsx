@@ -162,18 +162,32 @@ const Calculator = () => {
               <div className="font-dxdynamix text-md">
                 ms DOGE Balance: 0.000 DOGE
               </div>
-              {/*Token selector*/}
-              <button className="flex items-center justify-between w-full border bg-[#1A3DCA] hover:bg-[#1534b1] rounded-md px-4 py-2 transition-colors">
-                <div className="flex items-center gap-2">
-                  <Image
-                    src="/assets/Ms Doge.png"
-                    alt="MS Doge Logo"
-                    width={20}
-                    height={20}
-                  />
-                  <span className="text-sm font-dxdynamix">DOGE</span>
-                </div>
-              </button>
+
+              {mode === "deposit" ? (
+                <button className="flex items-center justify-between w-full border bg-[#1A3DCA] hover:bg-[#1534b1] rounded-md px-4 py-2 transition-colors">
+                  <div className="flex items-center gap-2">
+                    <Image
+                      src="/assets/Ms Doge.png"
+                      alt="MS Doge Logo"
+                      width={20}
+                      height={20}
+                    />
+                    <span className="text-sm font-dxdynamix">ms DOGE</span>
+                  </div>
+                </button>
+              ) : (
+                <button className="flex items-center justify-between w-full border bg-[#1A3DCA] hover:bg-[#1534b1] rounded-md px-4 py-2 transition-colors">
+                  <div className="flex items-center gap-2">
+                    <Image
+                      src="/assets/tokens/doge.svg"
+                      alt="Doge Logo"
+                      width={20}
+                      height={20}
+                    />
+                    <span className="text-sm font-dxdynamix">DOGE</span>
+                  </div>
+                </button>
+              )}
             </div>
           </div>
 
